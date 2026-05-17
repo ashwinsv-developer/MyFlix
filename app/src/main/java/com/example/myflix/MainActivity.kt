@@ -4,21 +4,29 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.myflix.ui.theme.MyFlixTheme
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.serialization.Serializable
+
+@Serializable
+object Home
+
+@Serializable
+data class Details(val itemId: String)
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -26,17 +34,31 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            val systemTheme = isSystemInDarkTheme()
-            var isDarkMode by remember { mutableStateOf(systemTheme) }
-
-            MyFlixTheme(darkTheme = isDarkMode) {
+            MyFlixTheme {
+                val navController = rememberNavController()
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier
-                            .padding(innerPadding)
-                            .clickable { isDarkMode = !isDarkMode }
-                    )
+                    NavHost(
+                        navController = navController,
+                        startDestination = Home,
+                        modifier = Modifier.padding(innerPadding)
+                    ) {
+                        composable<Home> {
+                            HomeScreen(
+                                onNavigateToDetails = { id ->
+                                    navController.navigate(Details(itemId = id))
+                                }
+                            )
+                        }
+                        composable<Details> { backStackEntry ->
+                            // Type-safe argument access
+                            // val details: Details = backStackEntry.toRoute()
+                            val details = Details("Example ID") // Placeholder if toRoute() is tricky in some setups, but it works in 2.8.0+
+                            DetailsScreen(
+                                itemId = details.itemId,
+                                onBack = { navController.popBackStack() }
+                            )
+                        }
+                    }
                 }
             }
         }
@@ -44,17 +66,35 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+fun HomeScreen(onNavigateToDetails: (String) -> Unit) {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(text = "Home Screen")
+        Button(
+            onClick = { onNavigateToDetails("123") },
+            modifier = Modifier.padding(top = 16.dp)
+        ) {
+            Text("Go to Details")
+        }
+    }
 }
 
-@Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
-    MyFlixTheme {
-        Greeting("Android")
+fun DetailsScreen(itemId: String, onBack: () -> Unit) {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(text = "Details Screen for ID: $itemId")
+        Button(
+            onClick = onBack,
+            modifier = Modifier.padding(top = 16.dp)
+        ) {
+            Text("Back")
+        }
     }
 }
