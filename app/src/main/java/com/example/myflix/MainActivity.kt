@@ -22,6 +22,16 @@ import com.example.myflix.ui.theme.MyFlixTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.serialization.Serializable
 
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.toRoute
+import com.example.myflix.ui.home.HomeViewModel
+
 @Serializable
 object Home
 
@@ -50,9 +60,7 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                         composable<Details> { backStackEntry ->
-                            // Type-safe argument access
-                            // val details: Details = backStackEntry.toRoute()
-                            val details = Details("Example ID") // Placeholder if toRoute() is tricky in some setups, but it works in 2.8.0+
+                            val details: Details = backStackEntry.toRoute()
                             DetailsScreen(
                                 itemId = details.itemId,
                                 onBack = { navController.popBackStack() }
@@ -66,18 +74,43 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun HomeScreen(onNavigateToDetails: (String) -> Unit) {
+fun HomeScreen(
+    onNavigateToDetails: (String) -> Unit,
+    viewModel: HomeViewModel = hiltViewModel()
+) {
+    val movies by viewModel.movies.collectAsState()
+    val isLoading by viewModel.isLoading.collectAsState()
+
     Column(
         modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Home Screen")
+        Text(
+            text = "Popular Movies",
+            modifier = Modifier.padding(16.dp)
+        )
+
+        if (isLoading) {
+            CircularProgressIndicator(modifier = Modifier.padding(16.dp))
+        } else {
+            LazyColumn(modifier = Modifier.weight(1f)) {
+                items(movies) { movie ->
+                    Text(
+                        text = movie.title,
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(16.dp)
+                            .clickable { onNavigateToDetails(movie.id.toString()) }
+                    )
+                }
+            }
+        }
+
         Button(
-            onClick = { onNavigateToDetails("123") },
-            modifier = Modifier.padding(top = 16.dp)
+            onClick = { viewModel.loadMovies() },
+            modifier = Modifier.padding(16.dp)
         ) {
-            Text("Go to Details")
+            Text("Refresh")
         }
     }
 }
