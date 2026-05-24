@@ -26,6 +26,14 @@ android {
             "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    flavorDimensions += "version"
+    productFlavors {
+        create("develop") {
+            dimension = "version"
+            buildConfigField("String", "API_KEY", "\"59cd6896d8432f9c69aed9b86b9c2931\"")
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -50,6 +58,7 @@ android {
 
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
@@ -75,8 +84,10 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
 
     // RETROFIT
-    implementation(libs.retrofit)
+    implementation(libs.retrofit.core)
     implementation(libs.retrofit.kotlin.serialization)
+    implementation(libs.retrofit.converter.gson)
+    implementation(libs.gson)
     implementation(libs.okhttp)
     implementation(libs.okhttp.logging)
 
@@ -88,6 +99,10 @@ dependencies {
     ksp(libs.hilt.compiler)
 
     implementation(libs.androidx.hilt.navigation.compose)
+
+    // PAGING
+    implementation(libs.androidx.paging.runtime)
+    implementation(libs.androidx.paging.compose)
 
     // TEST
     testImplementation(libs.junit)

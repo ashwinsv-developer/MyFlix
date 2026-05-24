@@ -1,7 +1,9 @@
 package com.example.myflix.domain.repository
 
-import com.example.myflix.data.remote.dto.MovieListDto
+import androidx.paging.PagingData
+import com.example.myflix.data.remote.dto.MovieDto
+import kotlinx.coroutines.flow.Flow
 
 interface MovieRepository {
-    suspend fun getPopularMovies(page: Int): MovieListDto
+    fun getPopularMovies(): Flow<PagingData<MovieDto>>
 }

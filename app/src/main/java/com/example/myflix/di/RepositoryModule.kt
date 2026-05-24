@@ -1,7 +1,7 @@
 package com.example.myflix.di
 
-import com.example.myflix.data.repository.MovieRepositoryImpl
 import com.example.myflix.domain.repository.MovieRepository
+import com.piashcse.hilt_mvvm_compose_movie.data.repository.remote.movie.MovieRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
