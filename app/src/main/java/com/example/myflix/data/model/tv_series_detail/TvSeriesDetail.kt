@@ -1,9 +1,7 @@
-package com.piashcse.hilt_mvvm_compose_movie.data.model.tv_series_detail
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+package com.example.myflix.data.model.tv_series_detail
+
 import com.google.gson.annotations.SerializedName
 
-@Entity(tableName = "tvSeriesDetail")
 data class TvSeriesDetail(
     @SerializedName("adult")
     val adult: Boolean,
@@ -19,7 +17,6 @@ data class TvSeriesDetail(
     val genres: List<Genre>,
     @SerializedName("homepage")
     val homepage: String,
-    @PrimaryKey(autoGenerate = false)
     @SerializedName("id")
     val id: Int,
     @SerializedName("in_production")
@@ -27,15 +24,15 @@ data class TvSeriesDetail(
     @SerializedName("languages")
     val languages: List<String>,
     @SerializedName("last_air_date")
-    val lastAirDate: String?,
+    val lastAirDate: String,
     @SerializedName("last_episode_to_air")
-    val lastEpisodeToAir: LastEpisodeToAir?,
+    val lastEpisodeToAir: LastEpisodeToAir,
     @SerializedName("name")
     val name: String,
     @SerializedName("networks")
     val networks: List<Network>,
     @SerializedName("next_episode_to_air")
-    val nextEpisodeToAir: NextEpisodeToAir?,
+    val nextEpisodeToAir: NextEpisodeToAir,
     @SerializedName("number_of_episodes")
     val numberOfEpisodes: Int,
     @SerializedName("number_of_seasons")

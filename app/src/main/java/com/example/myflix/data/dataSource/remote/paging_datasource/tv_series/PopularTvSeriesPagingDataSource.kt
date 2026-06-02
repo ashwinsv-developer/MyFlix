@@ -1,11 +1,10 @@
-package com.piashcse.hilt_mvvm_compose_movie.data.datasource.remote.paging_datasource.tv_series
+package com.example.myflix.data.dataSource.remote.paging_datasource.tv_series
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.piashcse.hilt_mvvm_compose_movie.data.datasource.remote.ApiService
-import com.piashcse.hilt_mvvm_compose_movie.data.model.TvSeriesItem
+import com.example.myflix.data.dataSource.remote.ApiService
+import com.example.myflix.data.model.TvSeriesItem
 import retrofit2.HttpException
-import timber.log.Timber
 import java.io.IOException
 import javax.inject.Inject
 
@@ -29,10 +28,8 @@ class PopularTvSeriesPagingDataSource @Inject constructor(
                 nextKey = if (movieList.results.isNotEmpty()) movieList.page + 1 else null
             )
         } catch (exception: IOException) {
-            Timber.e("exception ${exception.message}")
             return LoadResult.Error(exception)
         } catch (httpException: HttpException) {
-            Timber.e("httpException ${httpException.message}")
             return LoadResult.Error(httpException)
         }
     }

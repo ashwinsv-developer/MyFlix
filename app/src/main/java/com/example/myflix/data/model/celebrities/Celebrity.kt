@@ -1,5 +1,4 @@
-package com.piashcse.hilt_mvvm_compose_movie.data.model.celebrities
-
+package com.example.myflix.data.model.celebrities
 
 import com.google.gson.annotations.SerializedName
 
@@ -16,8 +15,6 @@ data class Celebrity(
     val knownForDepartment: String,
     @SerializedName("name")
     val name: String,
-    @SerializedName("original_name")
-    val originalName: String,
     @SerializedName("popularity")
     val popularity: Double,
     @SerializedName("profile_path")

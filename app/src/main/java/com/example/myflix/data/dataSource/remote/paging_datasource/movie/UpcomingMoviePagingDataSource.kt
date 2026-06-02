@@ -1,11 +1,10 @@
-package com.piashcse.hilt_mvvm_compose_movie.data.datasource.remote.paging_datasource.movie
+package com.example.myflix.data.dataSource.remote.paging_datasource.movie
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.myflix.data.dataSource.remote.ApiService
-import com.piashcse.hilt_mvvm_compose_movie.data.model.MovieItem
+import com.example.myflix.data.model.MovieItem
 import retrofit2.HttpException
-
 import java.io.IOException
 import javax.inject.Inject
 
@@ -26,10 +25,8 @@ class UpcomingMoviePagingDataSource @Inject constructor(private val apiService: 
                 nextKey = if (movieList.results.isNotEmpty()) movieList.page + 1 else null
             )
         } catch (exception: IOException) {
-
             return LoadResult.Error(exception)
         } catch (httpException: HttpException) {
-           
             return LoadResult.Error(httpException)
         }
     }

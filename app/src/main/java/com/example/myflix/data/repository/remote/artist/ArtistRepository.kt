@@ -1,8 +1,8 @@
-package com.piashcse.hilt_mvvm_compose_movie.data.repository.remote.artist
+package com.example.myflix.data.repository.remote.artist
 
-import com.piashcse.hilt_mvvm_compose_movie.data.model.artist.ArtistDetail
-import com.piashcse.hilt_mvvm_compose_movie.data.model.artist.ArtistMovies
-import com.piashcse.hilt_mvvm_compose_movie.utils.network.DataState
+import com.example.myflix.utils.network.DataState
+import com.example.myflix.data.model.artist.ArtistDetail
+import com.example.myflix.data.model.artist.ArtistMovies
 import kotlinx.coroutines.flow.Flow
 
 interface ArtistRepository {

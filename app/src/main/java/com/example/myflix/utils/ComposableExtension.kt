@@ -1,4 +1,4 @@
-package com.piashcse.hilt_mvvm_compose_movie.utils
+package com.example.myflix.utils
 
 import androidx.compose.foundation.lazy.grid.LazyGridItemScope
 import androidx.compose.foundation.lazy.grid.LazyGridScope
@@ -7,7 +7,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
-import com.example.myflix.utils.utils.network.DataState
+import com.example.myflix.utils.network.DataState
 
 fun <T : Any> LazyGridScope.items(
     lazyPagingItems: LazyPagingItems<T>,

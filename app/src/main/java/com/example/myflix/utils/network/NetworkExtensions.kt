@@ -1,4 +1,4 @@
-package com.example.myflix.utils.utils.network
+package com.example.myflix.utils.network
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

@@ -1,19 +1,19 @@
-package com.piashcse.hilt_mvvm_compose_movie.data.repository.remote.tvseries
+package com.example.myflix.data.repository.remote.tvseries
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.piashcse.hilt_mvvm_compose_movie.data.datasource.remote.ApiService
-import com.piashcse.hilt_mvvm_compose_movie.data.datasource.remote.paging_datasource.tv_series.AiringTodayTvSeriesPagingDataSource
-import com.piashcse.hilt_mvvm_compose_movie.data.datasource.remote.paging_datasource.tv_series.OnTheAirTvSeriesPagingDataSource
-import com.piashcse.hilt_mvvm_compose_movie.data.datasource.remote.paging_datasource.tv_series.PopularTvSeriesPagingDataSource
-import com.piashcse.hilt_mvvm_compose_movie.data.datasource.remote.paging_datasource.tv_series.TopRatedTvSeriesPagingDataSource
-import com.piashcse.hilt_mvvm_compose_movie.data.model.SearchBaseModel
-import com.piashcse.hilt_mvvm_compose_movie.data.model.TvSeriesItem
-import com.piashcse.hilt_mvvm_compose_movie.data.model.artist.Artist
-import com.piashcse.hilt_mvvm_compose_movie.data.model.tv_series_detail.TvSeriesDetail
-import com.piashcse.hilt_mvvm_compose_movie.utils.network.DataState
-import com.piashcse.hilt_mvvm_compose_movie.utils.network.safeApiCall
+import com.example.myflix.data.dataSource.remote.ApiService
+import com.example.myflix.data.dataSource.remote.paging_datasource.tv_series.AiringTodayTvSeriesPagingDataSource
+import com.example.myflix.data.dataSource.remote.paging_datasource.tv_series.OnTheAirTvSeriesPagingDataSource
+import com.example.myflix.data.dataSource.remote.paging_datasource.tv_series.PopularTvSeriesPagingDataSource
+import com.example.myflix.data.dataSource.remote.paging_datasource.tv_series.TopRatedTvSeriesPagingDataSource
+import com.example.myflix.data.model.SearchBaseModel
+import com.example.myflix.data.model.TvSeriesItem
+import com.example.myflix.data.model.artist.Artist
+import com.example.myflix.data.model.tv_series_detail.TvSeriesDetail
+import com.example.myflix.utils.network.DataState
+import com.example.myflix.utils.network.safeApiCall
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

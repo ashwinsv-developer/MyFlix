@@ -95,6 +95,7 @@ dependencies {
 
     // HILT
     implementation(libs.hilt.android)
+    implementation(libs.androidx.room3.common.jvm)
 
     ksp(libs.hilt.compiler)
 

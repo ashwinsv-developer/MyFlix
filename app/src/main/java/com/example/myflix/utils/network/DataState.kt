@@ -1,4 +1,4 @@
-package com.example.myflix.utils.utils.network
+package com.example.myflix.utils.network
 
 /**
  * Data state for processing api response Loading, Success and Error

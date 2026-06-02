@@ -1,10 +1,7 @@
-package com.piashcse.hilt_mvvm_compose_movie.data.model.moviedetail
+package com.example.myflix.data.model.moviedetail
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
-@Entity(tableName = "movieDetail")
 data class MovieDetail(
     @SerializedName("adult")
     val adult: Boolean,
@@ -16,7 +13,6 @@ data class MovieDetail(
     val genres: List<Genre>,
     @SerializedName("homepage")
     val homepage: String,
-    @PrimaryKey(autoGenerate = false)
     @SerializedName("id")
     val id: Int,
     @SerializedName("imdb_id")
@@ -48,5 +44,5 @@ data class MovieDetail(
     @SerializedName("vote_average")
     val voteAverage: Double,
     @SerializedName("vote_count")
-    val voteCount: Int,
+    val voteCount: Int
 )

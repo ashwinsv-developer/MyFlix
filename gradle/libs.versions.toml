@@ -24,6 +24,7 @@ hilt = "2.51.1"
 hiltNavigationCompose = "1.2.0"
 
 ksp = "2.0.21-1.0.28"
+room3CommonJvm = "3.0.0-alpha05"
 
 [libraries]
 
@@ -75,6 +76,7 @@ junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+androidx-room3-common-jvm = { group = "androidx.room3", name = "room3-common-jvm", version.ref = "room3CommonJvm" }
 
 [plugins]
 

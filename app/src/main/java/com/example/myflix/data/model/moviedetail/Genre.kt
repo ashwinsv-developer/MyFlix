@@ -1,4 +1,4 @@
-package com.piashcse.hilt_mvvm_compose_movie.data.model.moviedetail
+package com.example.myflix.data.model.moviedetail
 
 import com.google.gson.annotations.SerializedName
 

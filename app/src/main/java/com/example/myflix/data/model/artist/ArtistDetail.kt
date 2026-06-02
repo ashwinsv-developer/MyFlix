@@ -1,5 +1,4 @@
-package com.piashcse.hilt_mvvm_compose_movie.data.model.artist
-
+package com.example.myflix.data.model.artist
 
 import com.google.gson.annotations.SerializedName
 
@@ -11,13 +10,13 @@ data class ArtistDetail(
     @SerializedName("biography")
     val biography: String,
     @SerializedName("birthday")
-    val birthday: String?,
+    val birthday: String,
     @SerializedName("deathday")
     val deathday: Any,
     @SerializedName("gender")
     val gender: Int,
     @SerializedName("homepage")
-    val homepage: String,
+    val homepage: Any,
     @SerializedName("id")
     val id: Int,
     @SerializedName("imdb_id")
@@ -27,7 +26,7 @@ data class ArtistDetail(
     @SerializedName("name")
     val name: String,
     @SerializedName("place_of_birth")
-    val placeOfBirth: String?,
+    val placeOfBirth: String,
     @SerializedName("popularity")
     val popularity: Double,
     @SerializedName("profile_path")

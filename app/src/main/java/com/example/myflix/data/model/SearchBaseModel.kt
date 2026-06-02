@@ -1,4 +1,4 @@
-package com.piashcse.hilt_mvvm_compose_movie.data.model
+package com.example.myflix.data.model
 
 import com.google.gson.annotations.SerializedName
 
@@ -10,5 +10,5 @@ data class SearchBaseModel(
     @SerializedName("total_pages")
     val totalPages: Int,
     @SerializedName("total_results")
-    val totalResults: Int,
+    val totalResults: Int
 )

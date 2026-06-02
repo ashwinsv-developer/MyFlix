@@ -1,4 +1,4 @@
-package com.piashcse.hilt_mvvm_compose_movie.utils
+package com.example.myflix.utils
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination

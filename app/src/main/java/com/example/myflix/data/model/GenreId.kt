@@ -1,3 +1,3 @@
-package com.piashcse.hilt_mvvm_compose_movie.data.model
+package com.example.myflix.data.model
 
 data class GenreId(val genreId: String? = null)

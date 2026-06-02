@@ -1,4 +1,4 @@
-package com.piashcse.hilt_mvvm_compose_movie.utils
+package com.example.myflix.utils
 
 object AppConstant {
     const val MINIMIZED_MAX_LINES = 2

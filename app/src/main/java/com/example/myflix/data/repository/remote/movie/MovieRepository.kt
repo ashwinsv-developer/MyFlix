@@ -1,12 +1,12 @@
-package com.piashcse.hilt_mvvm_compose_movie.data.repository.remote.movie
+package com.example.myflix.data.repository.remote.movie
 
 import androidx.paging.PagingData
-import com.example.myflix.utils.utils.network.DataState
-import com.piashcse.hilt_mvvm_compose_movie.data.model.Genres
-import com.piashcse.hilt_mvvm_compose_movie.data.model.MovieItem
-import com.piashcse.hilt_mvvm_compose_movie.data.model.SearchBaseModel
-import com.piashcse.hilt_mvvm_compose_movie.data.model.artist.Artist
-import com.piashcse.hilt_mvvm_compose_movie.data.model.moviedetail.MovieDetail
+import com.example.myflix.data.model.MovieItem
+import com.example.myflix.data.model.SearchBaseModel
+import com.example.myflix.data.model.moviedetail.MovieDetail
+import com.example.myflix.utils.network.DataState
+import com.example.myflix.data.model.Genres
+import com.example.myflix.data.model.artist.Artist
 import kotlinx.coroutines.flow.Flow
 
 interface MovieRepository {

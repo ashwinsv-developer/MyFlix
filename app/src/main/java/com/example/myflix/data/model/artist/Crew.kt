@@ -1,5 +1,4 @@
-package com.piashcse.hilt_mvvm_compose_movie.data.model.artist
-
+package com.example.myflix.data.model.artist
 
 import com.google.gson.annotations.SerializedName
 
@@ -25,5 +24,5 @@ data class Crew(
     @SerializedName("popularity")
     val popularity: Double,
     @SerializedName("profile_path")
-    val profilePath: String
+    val profilePath: String?
 )

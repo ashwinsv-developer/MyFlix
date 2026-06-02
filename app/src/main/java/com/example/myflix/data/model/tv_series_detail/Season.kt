@@ -1,9 +1,10 @@
-package com.piashcse.hilt_mvvm_compose_movie.data.model.tv_series_detail
+package com.example.myflix.data.model.tv_series_detail
+
 import com.google.gson.annotations.SerializedName
 
 data class Season(
     @SerializedName("air_date")
-    val airDate: String?,
+    val airDate: String,
     @SerializedName("episode_count")
     val episodeCount: Int,
     @SerializedName("id")
@@ -13,9 +14,7 @@ data class Season(
     @SerializedName("overview")
     val overview: String,
     @SerializedName("poster_path")
-    val posterPath: String?,
+    val posterPath: String,
     @SerializedName("season_number")
-    val seasonNumber: Int,
-    @SerializedName("vote_average")
-    val voteAverage: Double
+    val seasonNumber: Int
 )

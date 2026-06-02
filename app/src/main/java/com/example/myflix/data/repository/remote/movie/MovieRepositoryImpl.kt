@@ -1,21 +1,21 @@
-package com.piashcse.hilt_mvvm_compose_movie.data.repository.remote.movie
+package com.example.myflix.data.repository.remote.movie
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.example.myflix.data.dataSource.remote.ApiService
-import com.example.myflix.utils.utils.network.DataState
-import com.example.myflix.utils.utils.network.safeApiCall
-import com.piashcse.hilt_mvvm_compose_movie.data.datasource.remote.paging_datasource.GenrePagingDataSource
-import com.piashcse.hilt_mvvm_compose_movie.data.datasource.remote.paging_datasource.movie.NowPlayingMoviePagingDataSource
-import com.piashcse.hilt_mvvm_compose_movie.data.datasource.remote.paging_datasource.movie.PopularMoviePagingDataSource
-import com.piashcse.hilt_mvvm_compose_movie.data.datasource.remote.paging_datasource.movie.TopRatedMoviePagingDataSource
-import com.piashcse.hilt_mvvm_compose_movie.data.datasource.remote.paging_datasource.movie.UpcomingMoviePagingDataSource
-import com.piashcse.hilt_mvvm_compose_movie.data.model.Genres
-import com.piashcse.hilt_mvvm_compose_movie.data.model.MovieItem
-import com.piashcse.hilt_mvvm_compose_movie.data.model.SearchBaseModel
-import com.piashcse.hilt_mvvm_compose_movie.data.model.artist.Artist
-import com.piashcse.hilt_mvvm_compose_movie.data.model.moviedetail.MovieDetail
+import com.example.myflix.data.dataSource.remote.paging_datasource.GenrePagingDataSource
+import com.example.myflix.data.dataSource.remote.paging_datasource.movie.NowPlayingMoviePagingDataSource
+import com.example.myflix.data.dataSource.remote.paging_datasource.movie.PopularMoviePagingDataSource
+import com.example.myflix.data.dataSource.remote.paging_datasource.movie.TopRatedMoviePagingDataSource
+import com.example.myflix.data.dataSource.remote.paging_datasource.movie.UpcomingMoviePagingDataSource
+import com.example.myflix.data.model.Genres
+import com.example.myflix.data.model.MovieItem
+import com.example.myflix.data.model.SearchBaseModel
+import com.example.myflix.data.model.artist.Artist
+import com.example.myflix.data.model.moviedetail.MovieDetail
+import com.example.myflix.utils.network.DataState
+import com.example.myflix.utils.network.safeApiCall
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

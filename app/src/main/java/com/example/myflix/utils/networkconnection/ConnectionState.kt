@@ -1,4 +1,4 @@
-package com.piashcse.hilt_mvvm_compose_movie.utils.networkconnection
+package com.example.myflix.utils.networkconnection
 
 sealed class ConnectionState {
     data object Available : ConnectionState()

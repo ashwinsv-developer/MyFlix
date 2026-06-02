@@ -1,8 +1,8 @@
 package com.example.myflix.di
 
 import com.example.myflix.data.dataSource.remote.ApiService
+import com.example.myflix.data.dataSource.remote.ApiURL
 import com.example.myflix.network.ApiKeyInterceptor
-import com.piashcse.hilt_mvvm_compose_movie.data.datasource.remote.ApiURL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

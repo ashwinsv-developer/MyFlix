@@ -1,15 +1,16 @@
 package com.example.myflix.data.dataSource.remote
-import com.piashcse.hilt_mvvm_compose_movie.data.model.BaseModel
-import com.piashcse.hilt_mvvm_compose_movie.data.model.Genres
-import com.piashcse.hilt_mvvm_compose_movie.data.model.MovieItem
-import com.piashcse.hilt_mvvm_compose_movie.data.model.SearchBaseModel
-import com.piashcse.hilt_mvvm_compose_movie.data.model.TvSeriesItem
-import com.piashcse.hilt_mvvm_compose_movie.data.model.artist.Artist
-import com.piashcse.hilt_mvvm_compose_movie.data.model.artist.ArtistDetail
-import com.piashcse.hilt_mvvm_compose_movie.data.model.artist.ArtistMovies
-import com.piashcse.hilt_mvvm_compose_movie.data.model.celebrities.Celebrity
-import com.piashcse.hilt_mvvm_compose_movie.data.model.moviedetail.MovieDetail
-import com.piashcse.hilt_mvvm_compose_movie.data.model.tv_series_detail.TvSeriesDetail
+
+import com.example.myflix.data.model.BaseModel
+import com.example.myflix.data.model.Genres
+import com.example.myflix.data.model.MovieItem
+import com.example.myflix.data.model.SearchBaseModel
+import com.example.myflix.data.model.TvSeriesItem
+import com.example.myflix.data.model.artist.Artist
+import com.example.myflix.data.model.artist.ArtistDetail
+import com.example.myflix.data.model.artist.ArtistMovies
+import com.example.myflix.data.model.celebrities.Celebrity
+import com.example.myflix.data.model.moviedetail.MovieDetail
+import com.example.myflix.data.model.tv_series_detail.TvSeriesDetail
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
