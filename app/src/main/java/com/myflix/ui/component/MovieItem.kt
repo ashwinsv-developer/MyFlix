@@ -1,16 +1,17 @@
 package com.myflix.ui.component
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.myflix.data.dataSource.remote.ApiURL
 import com.skydoves.landscapist.ImageOptions
@@ -24,16 +25,18 @@ import com.skydoves.landscapist.placeholder.shimmer.ShimmerPlugin
 fun <T> ItemView(
     item: T,
     itemImageUrlExtractor: (T) -> String,
+    itemTitleExtractor: (T) -> String,
     onclick: (T) -> Unit,
 ) {
-    Column(modifier = Modifier.padding(5.dp)) {
+    Column(
+        modifier = Modifier
+            .padding(5.dp)
+            .clickable { onclick(item) }
+    ) {
         CoilImage(
             modifier = Modifier
-                .size(250.dp)
-                .clip(RoundedCornerShape(10.dp))
-                .clickable {
-                    onclick(item)
-                },
+                .aspectRatio(0.66f)
+                .clip(RoundedCornerShape(10.dp)),
             imageModel = { ApiURL.IMAGE_URL + itemImageUrlExtractor(item) },
             imageOptions = ImageOptions(
                 contentScale = ContentScale.Crop,
@@ -48,6 +51,14 @@ fun <T> ItemView(
                     )
                 )
             }
+        )
+        Text(
+            text = itemTitleExtractor(item),
+            style = MaterialTheme.typography.titleSmall,
+            fontWeight = FontWeight.Bold,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier.padding(top = 4.dp, start = 4.dp, end = 4.dp)
         )
     }
 }

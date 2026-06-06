@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -21,9 +22,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
+import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.myflix.ui.component.AutoPaginationComponent
 import com.myflix.ui.component.MoviesGrid
+import com.myflix.ui.details.DetailsScreen
 import com.myflix.ui.home.HomeViewModel
 import com.myflix.ui.theme.MyFlixTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -87,23 +89,28 @@ fun HomeScreen(
             style = MaterialTheme.typography.headlineMedium
         )
 
+        MoviesGrid(
+            moviesItems = movies,
+            onClick = { movie ->
+                onNavigateToDetails(movie.id.toString())
+            }
+        )
 
-    }
-}
+        if (movies.loadState.refresh is LoadState.Loading || movies.loadState.append is LoadState.Loading) {
+            CircularProgressIndicator(modifier = Modifier.padding(16.dp))
+        }
 
-@Composable
-fun DetailsScreen(itemId: String, onBack: () -> Unit) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(text = "Details Screen for ID: $itemId")
-        Button(
-            onClick = onBack,
-            modifier = Modifier.padding(top = 16.dp)
-        ) {
-            Text("Back")
+        if (movies.loadState.refresh is LoadState.Error || movies.loadState.append is LoadState.Error) {
+            val error = (movies.loadState.refresh as? LoadState.Error) ?: (movies.loadState.append as? LoadState.Error)
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.padding(16.dp)
+            ) {
+                Text(text = "Error: ${error?.error?.localizedMessage}")
+                Button(onClick = { movies.retry() }) {
+                    Text("Retry")
+                }
+            }
         }
     }
 }

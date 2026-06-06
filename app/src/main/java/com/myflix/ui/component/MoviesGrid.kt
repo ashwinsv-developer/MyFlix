@@ -26,7 +26,10 @@ fun MoviesGrid(
         items(moviesItems) { item ->
             item?.let {
                 ItemView(
-                    item = item, itemImageUrlExtractor = { it.posterPath }, onclick = onClick
+                    item = item,
+                    itemImageUrlExtractor = { it.posterPath },
+                    itemTitleExtractor = { it.title },
+                    onclick = onClick
                 )
             }
         }
