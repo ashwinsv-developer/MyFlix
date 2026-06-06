@@ -4,10 +4,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.myflix.data.dataSource.remote.ApiService
 import com.example.myflix.data.model.MovieItem
-
-
 import retrofit2.HttpException
-
 import java.io.IOException
 import javax.inject.Inject
 import kotlin.collections.isNotEmpty
