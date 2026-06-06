@@ -12,11 +12,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.myflix"
+    namespace = "com.myflix"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.myflix"
+        applicationId = "com.myflix"
         minSdk = 24
         targetSdk = 35
         versionCode = 1
