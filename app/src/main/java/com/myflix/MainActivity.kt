@@ -12,9 +12,13 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
@@ -29,7 +33,10 @@ import com.myflix.ui.details.DetailsScreen
 import com.myflix.ui.home.HomeViewModel
 import com.myflix.ui.screens.PopularMovie.PopularMoviesScreen
 import com.myflix.ui.theme.MyFlixTheme
+import com.myflix.utils.networkconnection.ConnectionState
+import com.myflix.utils.networkconnection.connectivityState
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -49,9 +56,26 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 val navBackStackEntry by navController.currentBackStackEntryAsState()
                 val currentDestination = navBackStackEntry?.destination
+                val snackbarHostState = remember { SnackbarHostState() }
+                val connectionState by connectivityState()
+                val noInternetMessage = stringResource(R.string.no_internet_connection)
+
+                // This block reacts to the connection state
+                LaunchedEffect(connectionState) {
+                    if (connectionState is ConnectionState.Unavailable) {
+                        snackbarHostState.showSnackbar(
+                            message = noInternetMessage,
+                            duration = SnackbarDuration.Indefinite // Keep it visible until online
+                        )
+                    } else {
+                        // Dismiss if connection returns
+                        snackbarHostState.currentSnackbarData?.dismiss()
+                    }
+                }
 
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
+                    snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
                     topBar = {
                         TopAppBar(
                             title = {
@@ -87,6 +111,7 @@ class MainActivity : ComponentActivity() {
                     ) {
                         composable<Home> {
                             PopularMoviesScreen(
+                                snackbarHostState = snackbarHostState,
                                 onNavigateToDetails = { id ->
                                     navController.navigate(Details(itemId = id))
                                 }

@@ -10,26 +10,33 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
-import androidx.paging.compose.itemContentType
-import androidx.paging.compose.itemKey
 import com.myflix.ui.component.MoviesGrid
 import com.myflix.ui.home.HomeViewModel
+import com.myflix.utils.network.isConnectedToInternet
+import kotlinx.coroutines.launch
 
 @Composable
 fun PopularMoviesScreen(
     onNavigateToDetails: (String) -> Unit,
+    snackbarHostState: SnackbarHostState,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val movies = viewModel.movies.collectAsLazyPagingItems()
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+
+    val noInternetMessage = LocalContext.current.getString(com.myflix.R.string.no_internet_connection)
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -48,7 +55,21 @@ fun PopularMoviesScreen(
         }
 
         Button(
-            onClick = { movies.refresh() },
+            onClick = {
+                isConnectedToInternet(
+                    context = context,
+                    onNoInternet = {
+                        scope.launch {
+                            snackbarHostState.showSnackbar(
+                                message = noInternetMessage,
+                                actionLabel = "OK"
+                            )
+                        }
+                    }
+                ) {
+                    movies.refresh()
+                }
+            },
             modifier = Modifier.padding(16.dp)
         ) {
             Text("Refresh")
