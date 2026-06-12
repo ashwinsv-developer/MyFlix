@@ -36,13 +36,37 @@ fun PopularMoviesScreen(
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
 
-    val noInternetMessage = LocalContext.current.getString(com.myflix.R.string.no_internet_connection)
+    PopularMoviesContent(
+        movies = movies,
+        onNavigateToDetails = onNavigateToDetails,
+        onRefresh = {
+            isConnectedToInternet(
+                context = context,
+                onNoInternet = {
+                    scope.launch {
+                        snackbarHostState.showSnackbar(
+                            message = context.getString(com.myflix.R.string.no_internet_connection),
+                            actionLabel = "OK"
+                        )
+                    }
+                }
+            ) {
+                movies.refresh()
+            }
+        }
+    )
+}
 
+@Composable
+fun PopularMoviesContent(
+    movies: androidx.paging.compose.LazyPagingItems<com.myflix.data.model.MovieItem>,
+    onNavigateToDetails: (String) -> Unit,
+    onRefresh: () -> Unit
+) {
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
         MoviesGrid(
             moviesItems = movies,
             onClick = { movie ->
@@ -55,21 +79,7 @@ fun PopularMoviesScreen(
         }
 
         Button(
-            onClick = {
-                isConnectedToInternet(
-                    context = context,
-                    onNoInternet = {
-                        scope.launch {
-                            snackbarHostState.showSnackbar(
-                                message = noInternetMessage,
-                                actionLabel = "OK"
-                            )
-                        }
-                    }
-                ) {
-                    movies.refresh()
-                }
-            },
+            onClick = onRefresh,
             modifier = Modifier.padding(16.dp)
         ) {
             Text("Refresh")

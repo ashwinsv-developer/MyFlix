@@ -7,7 +7,7 @@ import com.myflix.data.model.celebrities.Celebrity
 import kotlinx.coroutines.flow.Flow
 
 interface CelebrityRepository {
-    fun popularCelebrities(page: Int): Flow<PagingData<Celebrity>>
+    fun popularCelebrities(): Flow<PagingData<Celebrity>>
     fun trendingCelebrities(page: Int): Flow<PagingData<Celebrity>>
 
     suspend fun searchCelebrity(searchKey: String): Flow<DataState<SearchBaseModel>>

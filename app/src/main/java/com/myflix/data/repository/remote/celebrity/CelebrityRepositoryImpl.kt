@@ -16,7 +16,7 @@ import javax.inject.Inject
 class CelebrityRepositoryImpl @Inject constructor(
     private val apiService: ApiService,
 ) : CelebrityRepository {
-    override fun popularCelebrities(page: Int): Flow<PagingData<Celebrity>> =
+    override fun popularCelebrities(): Flow<PagingData<Celebrity>> =
         Pager(
             pagingSourceFactory = { PopularCelebritiesPagingDataSource(apiService) },
             config = PagingConfig(pageSize = 20)
