@@ -20,11 +20,11 @@ fun AppNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Routes.Home.route,
+        startDestination = Routes.Celebrity.route,
         modifier = modifier
     ) {
         // Home Screen (Popular Movies)
-        composable(Routes.Home.route) {
+        composable(Routes.Celebrity.route) {
             PopularMoviesScreen(
                 snackbarHostState = snackbarHostState,
                 onNavigateToDetails = { id ->
@@ -34,7 +34,7 @@ fun AppNavHost(
         }
 
         // Profile Screen (Popular Celebrities)
-        composable(Routes.Profile.route) {
+        composable(Routes.Movie.route) {
             PopularCelebrityScreen(navController = navController)
         }
 

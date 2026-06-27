@@ -1,6 +1,8 @@
 package com.myflix.ui.component
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -50,41 +52,51 @@ fun DisplayCelebrity (
 
 ){
     LazyVerticalGrid(
-        columns = GridCells.Fixed(2),
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
+        verticalArrangement = Arrangement.spacedBy(12.dp),
+        contentPadding = PaddingValues(2.dp),        columns = GridCells.Fixed(2),
         modifier = Modifier
-            .padding(horizontal = 5.dp)) {
+            .padding( 5.dp)) {
        items(celebrities) { item ->
            item?.let {
-               CoilImage(
-                   modifier = Modifier
-                       .aspectRatio(0.66f)
-                       .clip(RoundedCornerShape(10.dp)),
-                   imageModel = { ApiURL.IMAGE_URL +item.profilePath },
-                   imageOptions = ImageOptions(
-                       contentScale = ContentScale.Crop,
-                       alignment = Alignment.Center,
-                   ),
-                   component = rememberImageComponent {
-                       +CircularRevealPlugin(duration = 800)
-                       +ShimmerPlugin(
-                           shimmer = Shimmer.Flash(
-                               baseColor = MaterialTheme.colorScheme.surfaceVariant,
-                               highlightColor = MaterialTheme.colorScheme.surface
+               Column() {
+                   CoilImage(
+                       modifier = Modifier
+                           .aspectRatio(0.66f)
+                           .clip(RoundedCornerShape(10.dp)),
+                       imageModel = { ApiURL.IMAGE_URL + item.profilePath },
+                       imageOptions = ImageOptions(
+                           contentScale = ContentScale.Crop,
+                           alignment = Alignment.Center,
+                       ),
+                       component = rememberImageComponent {
+                           +CircularRevealPlugin(duration = 800)
+                           +ShimmerPlugin(
+                               shimmer = Shimmer.Flash(
+                                   baseColor = MaterialTheme.colorScheme.surfaceVariant,
+                                   highlightColor = MaterialTheme.colorScheme.surface
+                               )
                            )
+                       }
+                   )
+                   Column(Modifier.padding(start = 4.dp, end = 4.dp, top = 4.dp)) {
+                       Text(
+                           text = item.name,
+                           fontWeight = FontWeight.Bold,
+                           fontSize = 18.sp
+                       )
+                       Text(
+                           text = "Popularity: ${
+                               String.format(
+                                   Locale.US,
+                                   "%.1f",
+                                   item.popularity
+                               )
+                           }",
+                           fontSize = 14.sp,
+                           color = Color.Gray
                        )
                    }
-               )
-               Column(Modifier.padding(start = 4.dp, end = 4.dp, top = 4.dp)) {
-                   Text(
-                       text = item.name,
-                       fontWeight = FontWeight.Bold,
-                       fontSize = 18.sp
-                   )
-                   Text(
-                       text = "Popularity: ${String.format(Locale.US, "%.1f", item.popularity)}",
-                       fontSize = 14.sp,
-                       color = Color.Gray
-                   )
                }
            }
        }

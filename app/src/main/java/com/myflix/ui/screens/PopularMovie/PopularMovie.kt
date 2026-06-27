@@ -1,5 +1,6 @@
 package com.myflix.ui.screens.PopularMovie
 
+import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,16 +14,20 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.ViewModelStoreOwner
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.myflix.ui.component.MoviesGrid
 import com.myflix.ui.home.HomeViewModel
+import com.myflix.ui.viewmodel.MainActivityViewModel
 import com.myflix.utils.network.isConnectedToInternet
 import kotlinx.coroutines.launch
 
@@ -35,6 +40,13 @@ fun PopularMoviesScreen(
     val movies = viewModel.movies.collectAsLazyPagingItems()
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
+
+    var mainViewModel: MainActivityViewModel = hiltViewModel(LocalActivity.current as ViewModelStoreOwner)
+
+    LaunchedEffect(Unit)  {
+        mainViewModel.setTopBarTitle("Popular movie")
+        mainViewModel.setBackButtonVisible(false)
+    }
 
     PopularMoviesContent(
         movies = movies,

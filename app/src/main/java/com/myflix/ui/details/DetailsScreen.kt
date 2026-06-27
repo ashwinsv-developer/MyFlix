@@ -16,6 +16,9 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.activity.compose.LocalActivity
+import androidx.lifecycle.ViewModelStoreOwner
+import com.myflix.ui.viewmodel.MainActivityViewModel
 import com.myflix.data.dataSource.remote.ApiURL
 import com.myflix.utils.network.DataState
 import com.skydoves.landscapist.ImageOptions
@@ -32,10 +35,14 @@ fun DetailsScreen(
     viewModel: DetailsViewModel = hiltViewModel()
 ) {
     val movieDetailState by viewModel.movieDetail.collectAsState()
+    val mainViewModel: MainActivityViewModel = hiltViewModel(LocalActivity.current as ViewModelStoreOwner)
 
     LaunchedEffect(itemId) {
         viewModel.fetchMovieDetail(itemId.toInt())
+        mainViewModel.setTopBarTitle("Movie Details")
+        mainViewModel.setBackButtonVisible(true)
     }
+
 
     Box(
         modifier = Modifier.fillMaxSize()

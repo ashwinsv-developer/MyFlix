@@ -14,8 +14,8 @@ fun BottomBar(
 ) {
 
     val items = listOf(
-        Triple("Movie", Icons.Default.Home, Routes.Home.route),
-        Triple("Celebrity", Icons.Default.Person, Routes.Profile.route)
+        Triple("Movie", Icons.Default.Home, Routes.Celebrity.route),
+        Triple("Celebrity", Icons.Default.Person, Routes.Movie.route)
     )
 
     val currentRoute =

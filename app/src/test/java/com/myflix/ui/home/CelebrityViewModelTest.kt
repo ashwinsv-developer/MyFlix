@@ -17,7 +17,7 @@ import org.junit.Before
 import org.junit.Test
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class HomeViewModelTest {
+class CelebrityViewModelTest {
 
     private lateinit var viewModel: HomeViewModel
     private val repository: MovieRepository = mockk()
