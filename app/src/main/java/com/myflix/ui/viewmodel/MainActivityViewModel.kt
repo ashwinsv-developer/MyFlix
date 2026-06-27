@@ -31,6 +31,13 @@ class MainActivityViewModel @Inject constructor() : ViewModel() {
     private val _topBarActions = MutableStateFlow<List<TopBarAction>>(emptyList())
     val topBarActions: StateFlow<List<TopBarAction>> = _topBarActions.asStateFlow()
 
+    private val _showExitAlert = MutableStateFlow(false)
+    val showExitAlert: StateFlow<Boolean> = _showExitAlert.asStateFlow()
+
+    fun onBackPressed() { _showExitAlert.value = true }
+    fun dismissExitDialog() { _showExitAlert.value = false }
+
+
     fun onDestinationChanged(route: String?, hasPreviousBackStack: Boolean) {
         _showBottomBar.value = route in listOf(Routes.Celebrity.route, Routes.Movie.route)
         // Reset top bar state for the new destination
@@ -50,6 +57,14 @@ class MainActivityViewModel @Inject constructor() : ViewModel() {
     fun setTopBarActions(actions: List<TopBarAction>) {
         _topBarActions.value = actions
     }
+
+    fun setExitAlterDialog( show: Boolean){
+        _showExitAlert.value = show
+    }
+
+
+
+
 
     // ─── Network / Snackbar ───────────────────────────────────────────────────
 

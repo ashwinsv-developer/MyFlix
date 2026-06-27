@@ -2,6 +2,8 @@ package com.myflix
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.BackHandler
+import androidx.activity.compose.LocalActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -21,6 +23,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.myflix.navigation.AppNavHost
 import com.myflix.navigation.BottomBar
+import com.myflix.ui.component.AppExitDialog
 import com.myflix.ui.theme.MyFlixTheme
 import com.myflix.ui.viewmodel.MainActivityViewModel
 import com.myflix.ui.viewmodel.SnackbarEventDuration
@@ -59,6 +62,7 @@ fun MainActivityScreen(viewModel: MainActivityViewModel) {
     val snackbarHostState    = remember { SnackbarHostState() }
     val navBackStackEntry    by navController.currentBackStackEntryAsState()
     val connectionState      by connectivityState()
+    val activity = LocalActivity.current
 
     // String resources — kept in Composable since ViewModel shouldn't touch Context/strings directly
     val noInternetMessage = stringResource(R.string.no_internet_connection)
@@ -69,6 +73,7 @@ fun MainActivityScreen(viewModel: MainActivityViewModel) {
     val showBackButton by viewModel.showBackButton.collectAsStateWithLifecycle()
     val showBottomBar  by viewModel.showBottomBar.collectAsStateWithLifecycle()
     val topBarActions  by viewModel.topBarActions.collectAsStateWithLifecycle()
+    val showExitAlert  by viewModel.showExitAlert.collectAsStateWithLifecycle()
 
     // Notify VM whenever destination changes
     LaunchedEffect(navBackStackEntry) {
@@ -76,6 +81,10 @@ fun MainActivityScreen(viewModel: MainActivityViewModel) {
             route = navBackStackEntry?.destination?.route,
             hasPreviousBackStack = navController.previousBackStackEntry != null
         )
+    }
+
+    BackHandler(enabled = !showBackButton) {
+     viewModel.setExitAlterDialog( true)
     }
 
     // Notify VM whenever network state changes
@@ -153,5 +162,12 @@ fun MainActivityScreen(viewModel: MainActivityViewModel) {
             snackbarHostState = snackbarHostState,
             modifier = Modifier.padding(innerPadding)
         )
+
+        if (showExitAlert) {
+            AppExitDialog(
+                onConfirm = { activity?.finish() },
+                onDismiss = { viewModel.dismissExitDialog() }
+            )
+        }
     }
 }
